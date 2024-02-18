@@ -32,6 +32,7 @@ export default function PostRoute() {
     throw new Error("Couldn't fetch the program");
   }
 
+  // theoretically this should be client-only, but I don't care since it doesn't have the time
   const closestSunday = new Date();
   closestSunday.setDate(closestSunday.getDate() - closestSunday.getDay());
 

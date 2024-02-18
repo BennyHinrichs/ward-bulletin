@@ -6,6 +6,8 @@ import { loadQuery } from '~/sanity/loader.server';
 import { GROUPS_QUERY } from '~/sanity/queries';
 import { Group } from '~/sanity/types';
 import { ListItem } from '~/components/ListItem';
+// @ts-expect-error it doesn't like this package
+import { useHydrated } from 'remix-utils/use-hydrated';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const initial = await loadQuery<Group[]>(GROUPS_QUERY, params);
@@ -22,6 +24,7 @@ export default function PostRoute() {
     // @ts-expect-error -- TODO fix the typing here
     initial,
   });
+  const isHydrated = useHydrated();
 
   if (error) {
     throw error;
@@ -64,7 +67,11 @@ export default function PostRoute() {
           <ListItem
             icon="other"
             title={event.eventTitle}
-            subtitle={formatDate(event.eventDate, event.eventDateOnly)}
+            subtitle={
+              isHydrated
+                ? formatDate(event.eventDate, event.eventDateOnly)
+                : 'TBA'
+            }
             description={event.eventDescription}
             url={event.eventUrl}
             key={event.eventTitle}
