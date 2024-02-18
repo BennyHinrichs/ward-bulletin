@@ -46,21 +46,23 @@ export default function Index() {
     <main className="flex flex-col gap-4 flex-1 items-end mb-10">
       <div className="flex-1 w-full flex flex-col gap-4 items-center justify-center mb-6">
         <div>Share the site</div>
-        <QR
-          value={href}
-          size={256}
-          style={{ height: 'auto', maxWidth: '100%', width: '256px' }}
-          viewBox={`0 0 256 256`}
-        />
+        <div className="bg-white p-2">
+          <QR
+            value={href}
+            size={256}
+            style={{ height: 'auto', maxWidth: '100%', width: '256px' }}
+            viewBox={`0 0 256 256`}
+          />
+        </div>
       </div>
-      <Link to="/program" className="text-5xl font-thin">
+      <Link to="/program" className="text-5xl font-thin text-right">
         Program
       </Link>
       {data?.map((group) => (
         <Link
           to={`/group/${group.path.current}`}
           key={group.title}
-          className="text-5xl font-thin"
+          className="text-5xl font-thin text-right"
         >
           {group.title}
         </Link>
