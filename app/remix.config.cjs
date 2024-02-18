@@ -1,4 +1,4 @@
-import { config } from '@netlify/remix-adapter';
+const { config } = import('@netlify/remix-adapter');
 
 /** @type {import('@remix-run/dev').AppConfig} */
 module.exports = {
