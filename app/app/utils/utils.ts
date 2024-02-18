@@ -1,5 +1,5 @@
 export function formatDate(date: string | Date, dateOnly = false) {
-  return Intl.DateTimeFormat(navigator.language, {
+  return Intl.DateTimeFormat(navigator?.language || 'en-US', {
     dateStyle: 'medium',
     timeStyle: dateOnly ? undefined : 'medium',
   }).format(new Date(date));

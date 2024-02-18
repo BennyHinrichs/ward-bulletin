@@ -8,12 +8,6 @@ import { Program } from '~/sanity/types';
 import { ListItem } from '~/components/ListItem';
 import hymns from '../static/hymns.json';
 
-type Hymn = {
-  title: string;
-  number: number;
-  url: string;
-};
-
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const initial = await loadQuery<Program>(PROGRAM_QUERY, params);
   sanitize(initial.data);
