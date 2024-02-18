@@ -1,9 +1,4 @@
-import {
-  type LinksFunction,
-  json,
-  LoaderFunctionArgs,
-  MetaFunction,
-} from '@remix-run/node';
+import { type LinksFunction, json, LoaderFunctionArgs } from '@remix-run/node';
 import {
   Link,
   Links,
@@ -24,14 +19,6 @@ import {
   useQuery,
 } from '@sanity/react-loader';
 import { NAME_QUERY } from './sanity/queries';
-
-export const meta: MetaFunction = () => [
-  {
-    charset: 'utf-8',
-    title: 'New Remix App',
-    viewport: 'width=device-width,initial-scale=1',
-  },
-];
 
 const LiveVisualEditing = lazy(() => import('~/components/LiveVisualEditing'));
 

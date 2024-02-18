@@ -2,7 +2,9 @@ import {
   useLoaderData,
   type MetaFunction,
   Link,
+  useLocation,
   useHref,
+  NavLink,
 } from '@remix-run/react';
 import { useQuery } from '@sanity/react-loader';
 import { loadQuery } from '~/sanity/loader.server';
