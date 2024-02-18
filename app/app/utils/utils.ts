@@ -1,8 +1,11 @@
 export function formatDate(date: string | Date, dateOnly = false) {
-  return Intl.DateTimeFormat(navigator?.language || 'en-US', {
-    dateStyle: 'medium',
-    timeStyle: dateOnly ? undefined : 'medium',
-  }).format(new Date(date));
+  return Intl.DateTimeFormat(
+    typeof navigator === 'undefined' ? 'en-US' : navigator?.language,
+    {
+      dateStyle: 'medium',
+      timeStyle: dateOnly ? undefined : 'medium',
+    },
+  ).format(new Date(date));
 }
 
 /** For some reason, Sanity is sending back like 500 invisible characters on strings. This removes them. */
