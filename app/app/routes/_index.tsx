@@ -1,9 +1,4 @@
-import {
-  useLoaderData,
-  type MetaFunction,
-  Link,
-  useHref,
-} from '@remix-run/react';
+import { useLoaderData, type MetaFunction, Link } from '@remix-run/react';
 import { useQuery } from '@sanity/react-loader';
 import { loadQuery } from '~/sanity/loader.server';
 import { GROUPS_QUERY } from '~/sanity/queries';
@@ -11,6 +6,8 @@ import { Group } from '~/sanity/types';
 import { sanitize } from '~/utils/utils';
 // @ts-expect-error no clue why this isn't seeing the exported member
 import { QRCode, QRCodeProps } from 'react-qr-code';
+// @ts-expect-error it's not seeing this one either
+import { ClientOnly } from 'remix-utils/client-only';
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Ward Bulletin' }];
@@ -25,13 +22,14 @@ export const loader = async () => {
 
 export default function Index() {
   const { initial, query, params } = useLoaderData<typeof loader>();
-  const { data, loading, error, encodeDataAttribute } = useQuery<
-    typeof initial.data
-  >(query, params, {
-    // @ts-expect-error -- TODO fix the typing here
-    initial,
-  });
-  const href = useHref('/');
+  const { data, loading, error } = useQuery<typeof initial.data>(
+    query,
+    params,
+    {
+      // @ts-expect-error -- TODO fix the typing here
+      initial,
+    },
+  );
 
   if (error) {
     throw error;
@@ -47,12 +45,24 @@ export default function Index() {
       <div className="flex-1 w-full flex flex-col gap-4 items-center justify-center mb-6">
         <div>Share the site</div>
         <div className="bg-white p-2">
-          <QR
-            value={href}
-            size={256}
-            style={{ height: 'auto', maxWidth: '100%', width: '256px' }}
-            viewBox={`0 0 256 256`}
-          />
+          <ClientOnly
+            fallback={
+              <div
+                style={{ height: 256, width: 256 }}
+                className="bg-slate-600"
+              />
+            }
+          >
+            {() => (
+              <QR
+                value={location.href}
+                size={256}
+                style={{ height: 'auto', maxWidth: '100%', width: '256px' }}
+                viewBox={`0 0 256 256`}
+                className="transition-"
+              />
+            )}
+          </ClientOnly>
         </div>
       </div>
       <Link to="/program" className="text-5xl font-thin text-right">
