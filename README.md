@@ -6,9 +6,9 @@ A site for your local ward to put their Sunday program along with announcements 
 
 This starter uses [Remix](https://remix.run/) for the front end and [Sanity](https://sanity.io/) to handle its content, with the site deployed through [Netlify](https://www.netlify.com/). You will need to make both a Sanity and Netlify account. As of this commit, Netlify free tier includes 100GB/mo of bandwidth and Sanity allows ups to 20 collaborators (typically ward council members that you, the webmaster, have to invite).
 
-# Caveat
-
-I haven't meticulously groomed the READMEs, so I apologize is something is off
+> **Caveat**
+>
+> I haven't meticulously groomed the READMEs, so I apologize is something is off
 
 ## Guides
 
@@ -29,6 +29,12 @@ I haven't meticulously groomed the READMEs, so I apologize is something is off
 - [Sanity CLI](https://www.sanity.io/docs/getting-started-with-sanity-cli)
 
 ## Getting started
+
+Make a folder and de-git this repo into it (you might have to install degit)
+
+```sh
+npx degit https://github.com/BennyHinrichs/ward-bulletin
+```
 
 Run the following commands to prepare both applications:
 
