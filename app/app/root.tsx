@@ -33,8 +33,6 @@ export const meta: MetaFunction = () => [
   },
 ];
 
-const LiveVisualEditing = lazy(() => import('~/components/LiveVisualEditing'));
-
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const initial = await loadQuery<string>(NAME_QUERY, params);
 

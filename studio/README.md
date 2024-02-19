@@ -1,4 +1,4 @@
-# Sanity Blogging Content Studio
+# Sanity Content Studio
 
 Congratulations, you have now installed the Sanity Content Studio, an open source real-time content editing environment connected to the Sanity backend.
 

@@ -23,7 +23,7 @@ npm i -g netlify-cli@latest
 netlify login
 ```
 
-3. Create a new site:
+3. Create a new site (this will make a `.netlify` folder):
 
 ```sh
 netlify init
@@ -34,7 +34,7 @@ netlify init
 Ensure all packages are installed by running:
 
 ```sh
-npm install
+pnpm install
 ```
 
 Run
@@ -54,14 +54,14 @@ To add redirects and rewrites, add them to the `netlify.toml` file. For more inf
 To serve your site locally in a production-like environment, run
 
 ```sh
-npm run start
+pnpm start
 ```
 
 Your site will be available at [http://localhost:8888](http://localhost:8888). Note that it will not auto-reload when you make changes.
 
 ## Deployment
 
-There are two ways to deploy your app to Netlify, you can either link your app to your git repo and have it auto deploy changes to Netlify, or you can deploy your app manually. If you've followed the setup instructions already, all you need to do is run this:
+There are two ways to deploy your app to Netlify, you can either link your app to your git repo and have it auto deploy changes to Netlify (**suggested**), or you can deploy your app manually. If you've followed the setup instructions already, all you need to do is run this:
 
 ```sh
 # preview deployment
