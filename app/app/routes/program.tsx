@@ -7,6 +7,8 @@ import { PROGRAM_QUERY } from '~/sanity/queries';
 import { Program } from '~/sanity/types';
 import { ListItem } from '~/components/ListItem';
 import hymns from '../static/hymns.json';
+// @ts-expect-error it's not seeing this one either
+import { ClientOnly } from 'remix-utils/client-only';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const initial = await loadQuery<Program>(PROGRAM_QUERY, params);
@@ -38,7 +40,9 @@ export default function PostRoute() {
 
   return (
     <main className="flex flex-col gap-4 pb-2">
-      <h3>{formatDate(closestSunday, true)}</h3>
+      <ClientOnly fallback={<h3>Sunday</h3>}>
+        {() => <h3>{formatDate(closestSunday, true)}</h3>}
+      </ClientOnly>
       <ListItem icon="person" title={data.condutor} subtitle="Conducting" />
       <hr />
       <ListItem
