@@ -89,3 +89,15 @@ The `/app` and `/studio` folders are meant to be deployed separately.
 Make sure that after `/app` is deployed the `.env` file in `/studio` is updated with its deployment URL under `SANITY_STUDIO_PREVIEW_URL`.
 
 And `/app` has a `.env` file with `SANITY_STUDIO_URL` that points to the Studio's deployment URL.
+
+# Preview on Mobile
+
+If your computer and phone are on the same wifi, you can get your (Mac) device IP like
+
+```
+ipconfig getifaddr en0
+OR
+ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}'
+```
+
+Then on your phone, go to the result like `192.168.xxx.xxx:3000` and see your site live.
