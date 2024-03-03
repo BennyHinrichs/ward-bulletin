@@ -4,3 +4,4 @@ import groq from 'groq';
 export const GROUPS_QUERY = groq`*[_type == "group"]`;
 export const PROGRAM_QUERY = groq`*[_type == "program"][0]`;
 export const NAME_QUERY = groq`*[_type == "program"][0].title`;
+export const EXTERNAL_PROGRAM_QUERY = groq`*[_type == "program"][0].programUrl`;

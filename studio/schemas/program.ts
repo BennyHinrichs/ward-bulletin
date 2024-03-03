@@ -12,6 +12,14 @@ export default defineType({
       placeholder: '11th Ward',
     }),
     defineField({
+      name: 'programUrl',
+      title: 'External Program URL',
+      type: 'url',
+      placeholder: 'https://myprogram.com',
+      description:
+        'If this is present, the Program link will direct to here instead of the program using the data below',
+    }),
+    defineField({
       name: 'condutor',
       title: 'Conducting',
       type: 'string',

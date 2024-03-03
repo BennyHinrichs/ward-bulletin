@@ -1,5 +1,3 @@
-import type { Slug } from '@sanity/types';
-
 export interface Group {
   _type: 'group';
   _id: string;
@@ -26,6 +24,7 @@ export interface Program {
   _id: string;
   _createdAt: string;
   title: string;
+  programUrl: string;
   condutor: string;
   prayer1: string;
   prayer2: string;

@@ -51,7 +51,7 @@ export default function PostRoute() {
         {...hymns[data.song1 - 1]}
       />
       <ListItem icon="prayer" title={data.prayer1} subtitle="Opening Prayer" />
-      {data.preSacramentItems.map((item) => {
+      {data.preSacramentItems?.map((item) => {
         switch (item._type) {
           case 'babyBlessing':
             return (
@@ -87,7 +87,7 @@ export default function PostRoute() {
           <hr />
         </>
       ) : null}
-      {data.programItems.map((item) => {
+      {data.programItems?.map((item) => {
         switch (item._type) {
           case 'speaker':
             return (

@@ -1,7 +1,7 @@
 import { useLoaderData, type MetaFunction, Link } from '@remix-run/react';
 import { useQuery } from '@sanity/react-loader';
 import { loadQuery } from '~/sanity/loader.server';
-import { GROUPS_QUERY } from '~/sanity/queries';
+import { EXTERNAL_PROGRAM_QUERY, GROUPS_QUERY } from '~/sanity/queries';
 import { Group } from '~/sanity/types';
 import { sanitize } from '~/utils/utils';
 // @ts-expect-error no clue why this isn't seeing the exported member
@@ -15,13 +15,21 @@ export const meta: MetaFunction = () => {
 
 export const loader = async () => {
   const initial = await loadQuery<Group[]>(GROUPS_QUERY);
+  const initialProgramUrl = await loadQuery<string>(EXTERNAL_PROGRAM_QUERY);
   sanitize(initial.data);
 
-  return { initial, query: GROUPS_QUERY, params: {} };
+  return {
+    initial,
+    query: GROUPS_QUERY,
+    params: {},
+    initialProgramUrl,
+    programUrlQuery: EXTERNAL_PROGRAM_QUERY,
+  };
 };
 
 export default function Index() {
-  const { initial, query, params } = useLoaderData<typeof loader>();
+  const { initial, query, params, initialProgramUrl, programUrlQuery } =
+    useLoaderData<typeof loader>();
   const { data, loading, error } = useQuery<typeof initial.data>(
     query,
     params,
@@ -30,10 +38,20 @@ export default function Index() {
       initial,
     },
   );
+  const {
+    data: programUrl,
+    loading: programUrlLoading,
+    error: programUrlError,
+  } = useQuery<typeof initialProgramUrl.data>(programUrlQuery, params, {
+    // @ts-expect-error -- TODO fix the typing here
+    initial: initialProgramUrl,
+  });
 
   if (error) {
     throw error;
-  } else if (loading && !data) {
+  } else if (programUrlError) {
+    throw programUrlError;
+  } else if ((loading && !data) || (programUrlLoading && !programUrl)) {
     return <div>Loading...</div>;
   }
 
@@ -65,7 +83,11 @@ export default function Index() {
           </ClientOnly>
         </div>
       </div>
-      <Link to="/program" className="text-5xl font-thin text-right">
+      <Link
+        to={programUrl ? programUrl : '/program'}
+        target={programUrl ? '_blank' : undefined}
+        className="text-5xl font-thin text-right"
+      >
         Program
       </Link>
       {data?.map((group) => (

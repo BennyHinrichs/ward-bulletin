@@ -92,9 +92,13 @@ The schemas for the Sanity data are defined in the `/studio/schemas` folder. You
 
 The `/app` and `/studio` folders are meant to be deployed separately.
 
-Make sure that after `/app` is deployed the `.env` file in `/studio` is updated with its deployment URL under `SANITY_STUDIO_PREVIEW_URL`.
+Make sure that after `/app` is deployed the `.env` file in `/studio` is updated with its deployment URL under `SANITY_STUDIO_PREVIEW_URL`. Should be about as simple as going to `/studio` and running
 
-And `/app` has a `.env` file with `SANITY_STUDIO_URL` that points to the Studio's deployment URL.
+```
+npx sanity deploy
+```
+
+And `/app` has a `.env` file with `SANITY_STUDIO_URL` that points to the Studio's deployment URL. I suggest setting up CD so that when you push to GitHub, it will do an automatic deploy.
 
 # Preview on Mobile
 
